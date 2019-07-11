@@ -1,0 +1,33 @@
+﻿@{
+    @model IEnumerable<BlogProject.Models.Article>
+    ViewBag.Title = "";
+}
+@foreach (BlogProject.Models.Article article in Model)
+{
+    <!-- Blog Post -->
+    <div class="card mb-4">
+        <img class="card-img-top" src="~/Images/@article.Picture.Path" alt="Card image cap">
+        <div class="card-body">
+            <h2 class="card-title">@article.Title</h2>
+            <p class="card-text">
+                @if (article.Text.Length > 200)
+                {
+                    @article.Text.Substring(0, 200)
+                }
+                else
+                {
+                    @article.Text
+                }
+            </p>
+            <a href="/Home/ArticleDetail/@article.ArticleId" class="btn btn-primary">Devamını Oku &rarr;</a>
+        </div>
+        <div class="card-footer text-muted">
+            @String.Format("{0:dd MMMM yyyy}", article.CreatedDate)
+        </div>
+    </div>
+}
+@section Category{
+    @{
+        Html.RenderAction("_CategoryPartial", "Category");
+    }
+}

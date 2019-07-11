@@ -1,30 +1,31 @@
-﻿using System;
+﻿using BlogProject.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
+using PagedList.Mvc;
 
 namespace BlogProject.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        blogContext blogContext = new blogContext();
+        public ActionResult Index(int Page=1)
         {
-            return View();
+            var data = blogContext.Article.OrderByDescending(a=> a.ArticleId).ToPagedList(Page, 4);
+            return View(data);
         }
-
-        public ActionResult About()
+        public ActionResult ArticleDetail(int id)
         {
-            ViewBag.Message = "Your application description page.";
+            var article = blogContext.Article.Where(a=>a.ArticleId == id).SingleOrDefault();
+            if (article == null)
+            {
+                return HttpNotFound();
 
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            }
+            return View(article);
         }
     }
 }

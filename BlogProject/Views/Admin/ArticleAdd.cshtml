@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "Makale Ekle";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<div class="col-12 mt-5">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="header-title">@ViewBag.Title</h4>
+            <form action="~/Admin/ArticleAdd" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label>Makale Başlık</label>
+                    <input type="text" class="form-control" id="Title" name="Title" placeholder="Makale başlık" required>
+                </div>
+                <div class="form-group">
+                    <label>Makale Metni</label>
+                    <textarea class="form-control" style="height:120px" id="Text" name="Text" placeholder="Makale metni" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Makale Kategori</label>
+                    <select class="custom-select" id="CategoryId" name="CategoryId" required>
+                        @foreach (var categori in ViewBag.Categori)
+                        {
+                            <option value="@categori.CategoryId">@categori.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Resim</label>
+                    <div class="input-default-wrapper mt-3">
+                        <input type="file" id="Picture" name="Picture" class="form-control" required>
+                        <label class="label-for-default-js rounded-right mb-3" for="file-with-current">
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Açıklama</label>
+                    <input type="text" class="form-control" id="Description" name="Description" placeholder="Açıklama" required>
+                </div>
+                <fieldset disabled>
+                    <div class="form-group">
+                        <label>Tarih</label>
+                        <input class="form-control disabled" value="@ViewBag.Date" />
+                    </div>
+                </fieldset>
+                <div class="form-group">                  
+                    <input id="IsActive" type="checkbox" checked="checked" value="true" name="IsActive">
+                    <input type="hidden" value="false" name="IsActive">
+                    <label class="form-check-label">Aktif/Pasif</label>
+                </div>
+                <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Ekle</button>
+            </form>
+        </div>
+    </div>
+</div>

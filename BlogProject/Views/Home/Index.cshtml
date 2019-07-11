@@ -1,31 +1,33 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    @model IEnumerable<BlogProject.Models.Article>
+    ViewBag.Title = "Anasayfa";
 }
-
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+@foreach (BlogProject.Models.Article article in Model)
+{
+    <!-- Blog Post -->
+    <div class="card mb-4">
+        <img class="card-img-top" src="~/Images/@article.Picture.Path" alt="Card image cap">
+        <div class="card-body">
+            <h2 class="card-title">@article.Title</h2>
+            <p class="card-text">
+                @if (article.Text.Length > 200)
+                {
+                    @article.Text.Substring(0, 200)
+                }
+                else
+                {
+                    @article.Text
+                }
+            </p>
+            <a href="/Home/ArticleDetail/@article.ArticleId" class="btn btn-primary">Devamını Oku &rarr;</a>
+        </div>
+        <div class="card-footer text-muted">
+            @String.Format("{0:dd MMMM yyyy}", article.CreatedDate)
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+}
+@section Category{
+    @{
+        Html.RenderAction("_CategoryPartial", "Category");
+    }
+}

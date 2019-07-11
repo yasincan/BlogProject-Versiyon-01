@@ -1,0 +1,23 @@
+﻿@model BlogProject.Models.Article
+
+@{
+    ViewBag.Title = Model.Title;
+}
+<!-- Post Content Column -->
+<!-- Preview Image -->
+<img class="img-fluid rounded" src="~/Images/@Model.Picture.Path" alt="">
+<hr />
+<!-- Date/Time -->
+<p>
+    @String.Format("{0:dd MMMM yyyy}", Model.CreatedDate)
+
+    <hr>
+
+    <!-- Post Content -->
+<p class="lead">@Html.Raw(Model.Text)</p>
+<hr />
+@section Category{
+    @{
+        Html.RenderAction("_CategoryPartial", "Category");
+    }
+}

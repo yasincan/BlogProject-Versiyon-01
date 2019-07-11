@@ -1,0 +1,50 @@
+﻿@model IEnumerable<BlogProject.Models.Category>
+@{
+    ViewBag.Title = "Kategoiler";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<div class="col-12 mt-5">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="header-title">@ViewBag.Title</div>
+                </div>
+                <div class="col-sm-6">
+                    <a href="~/Admin/CategoryAdd" class="btn btn-rounded btn-success mb-3 float-right ">Yeni Kategori Ekle</a>
+                </div>
+            </div>
+            <div class="single-table">
+                <div class="table-responsive">
+                    <table class="table table-hover progress-table text-center">
+                        <thead class="text-uppercase">
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Adı</th>
+                                <th scope="col">Açıklama</th>
+                                <th scope="col">Sil/Düzenle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach(BlogProject.Models.Category category in Model)
+                            {
+                                <tr>
+                                    <th scope="row">@category.CategoryId</th>
+                                    <td>@category.Name</td>
+                                    <td>@category.Description</td>
+                                    <td>
+                                        <ul class="d-flex justify-content-center">
+                                            <li class="mr-3"><a href="~/Admin/CategoryEdit/@category.CategoryId" class="text-secondary"><i class="fa fa-edit"></i></a></li>
+                                            <li><a href="~/Admin/CategoryDelete/@category.CategoryId" class="text-danger"><i class="ti-trash"></i></a></li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
