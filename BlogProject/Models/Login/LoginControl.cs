@@ -14,7 +14,7 @@ namespace BlogProject.Models
             {
                 if (!string.IsNullOrEmpty(HttpContext.Current.Session["UserID"].ToString()))
                 {
-                    base.OnActionExecuted(filterContext);
+                    base.OnActionExecuting(filterContext);
                 }
                 else
                 {
