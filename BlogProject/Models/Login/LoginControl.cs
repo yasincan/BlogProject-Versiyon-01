@@ -8,7 +8,7 @@ namespace BlogProject.Models
 {
     public class LoginControl:ActionFilterAttribute
     {
-        public override void OnActionExecuted(ActionExecutedContext filterContext)
+        public override void OnActionExecuting(ActionExecutedContext filterContext)
         {
             try
             {
